@@ -10,6 +10,7 @@ import bg.metaheuristic.abc.environment.resource.Resource;
  */
 public class OnLookersQueue extends ResourceQueue {
 
+	@Override
 	public void enqueue(final Resource element) {
 		synchronized (queue) {
 			queue.offer(element);
@@ -17,6 +18,7 @@ public class OnLookersQueue extends ResourceQueue {
 		}
 	}
 
+	@Override
 	public Resource dequeue() throws InterruptedException {
 		synchronized (queue) {
 			while (queue.isEmpty()) {

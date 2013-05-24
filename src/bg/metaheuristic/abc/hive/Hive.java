@@ -37,24 +37,45 @@ public class Hive {
 		initScouts(scoutsCount, scoutCriteria);
 	}
 
+	/**
+	 * Fires up the show! The scout bees are send to search resources, employee
+	 * bees are working on the currently found resource, everything works like a
+	 * charm :))
+	 */
 	public void start() {
 		sendScoutsToInvestigate();
 		wakeUpEmployees();
 		waitToFinish();
 	}
 
+	/**
+	 * Checks if the current environment is exhausted (is running out of
+	 * resources)
+	 * 
+	 * @return
+	 */
 	public boolean isEnvironmentExhausted() {
 		synchronized (workingScoutsCount) {
 			return (workingScoutsCount == 0);
 		}
 	}
 
+	/**
+	 * Decrease the number of active scouts. When there is no resource to be
+	 * checked the scouts are going inactive
+	 */
 	public void decreaseWorkingScoutsCount() {
 		synchronized (workingScoutsCount) {
 			workingScoutsCount--;
 		}
 	}
 
+	/**
+	 * Creates the employee bees
+	 * 
+	 * @param count
+	 * @param criteria
+	 */
 	private void initEmployeeBees(final int count, final Criteria criteria) {
 		employees = new HashSet<Bee>(count);
 		for (int i = 0; i < count; i++) {
@@ -62,6 +83,12 @@ public class Hive {
 		}
 	}
 
+	/**
+	 * Creates the scout bees
+	 * 
+	 * @param count
+	 * @param criteria
+	 */
 	private void initScouts(final int count, final Criteria criteria) {
 		scouts = new HashSet<Bee>(count);
 		for (int i = 0; i < count; i++) {
@@ -69,18 +96,28 @@ public class Hive {
 		}
 	}
 
+	/**
+	 * Stars all scouts and send them to investigate and filter resources
+	 */
 	private void sendScoutsToInvestigate() {
 		for (Bee bee : scouts) {
 			bee.start();
 		}
 	}
 
+	/**
+	 * Wakse up all the employee bees that are waiting for a propriate resource
+	 * to be processed
+	 */
 	private void wakeUpEmployees() {
 		for (Bee bee : employees) {
 			bee.start();
 		}
 	}
 
+	/**
+	 * Tell the current thread to wait all the bees to finish their work
+	 */
 	private void waitToFinish() {
 
 		try {
