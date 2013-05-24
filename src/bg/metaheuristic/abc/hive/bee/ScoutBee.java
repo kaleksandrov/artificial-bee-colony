@@ -40,6 +40,7 @@ public class ScoutBee extends Bee {
 					hive.getOnlookersQueue().enqueue(resource);
 				}
 			} else {
+				hive.getOnlookersQueue().setExhausted();
 				break;
 			}
 		}

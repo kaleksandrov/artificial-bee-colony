@@ -140,6 +140,12 @@ public class Hive {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		Log.info(Constants.LOG_RULE_THICK);
+		for (Resource resource : result) {
+			Log.info(Constants.LOG_RULE_THIN);
+			Log.info(resource.toString());
+		}
 	}
 
 	/* Getters & Setters */

@@ -11,6 +11,8 @@ import bg.metaheuristic.log.Log;
  */
 public class OnLookersQueue extends ResourceQueue {
 
+	private boolean isExhausted;
+
 	@Override
 	public void enqueue(final Resource element) {
 		synchronized (queue) {
@@ -23,12 +25,18 @@ public class OnLookersQueue extends ResourceQueue {
 	@Override
 	public Resource dequeue() throws InterruptedException {
 		synchronized (queue) {
-			if (queue.isEmpty()) {
+			if (queue.isEmpty() && !isExhausted) {
 				Log.debug(Thread.currentThread().getName()
 						+ " starting to wait");
 				queue.wait();
 			}
 			return queue.poll();
+		}
+	}
+
+	public void setExhausted() {
+		synchronized (queue) {
+			isExhausted = true;
 		}
 	}
 }
