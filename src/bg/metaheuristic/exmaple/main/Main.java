@@ -8,6 +8,7 @@ import bg.metaheuristic.abc.environment.resource.Resource;
 import bg.metaheuristic.abc.environment.resource.WaterResource;
 import bg.metaheuristic.abc.environment.resource.WoodResource;
 import bg.metaheuristic.abc.hive.Hive;
+import bg.metaheuristic.log.Log;
 
 /**
  * The main class of the application
@@ -28,18 +29,28 @@ public class Main {
 			{
 
 				addResource(new WaterResource());
-				addResource(new FoodResource());
-				addResource(new WoodResource());
-				addResource(new FoodResource());
-				addResource(new FoodResource());
-				addResource(new WaterResource());
-				addResource(new WoodResource());
-				addResource(new FoodResource());
-				addResource(new FoodResource());
-				addResource(new FoodResource());
-				addResource(new WoodResource());
 				addResource(new WaterResource());
 				addResource(new WaterResource());
+				addResource(new WaterResource());
+				addResource(new WaterResource());
+				addResource(new WaterResource());
+				addResource(new WaterResource());
+
+				addResource(new FoodResource());
+				addResource(new FoodResource());
+				addResource(new FoodResource());
+//				addResource(new FoodResource());
+//				addResource(new FoodResource());
+//				addResource(new FoodResource());
+//				addResource(new FoodResource());
+//				addResource(new FoodResource());
+
+				addResource(new WoodResource());
+				addResource(new WoodResource());
+				addResource(new WoodResource());
+				addResource(new WoodResource());
+				addResource(new WoodResource());
+				addResource(new WoodResource());
 			}
 		};
 
@@ -48,7 +59,7 @@ public class Main {
 			@Override
 			public boolean process(final Resource resource) {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -66,7 +77,7 @@ public class Main {
 			}
 		};
 
-		final Hive hive = new Hive(10, 10, environment, scoutCriteria,
+		final Hive hive = new Hive(2, 2, environment, scoutCriteria,
 				employeeCriteria);
 		hive.start();
 	}

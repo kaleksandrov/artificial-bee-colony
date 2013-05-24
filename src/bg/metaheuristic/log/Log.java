@@ -11,7 +11,7 @@ import bg.metaheuristic.log.Logger.LogLevel;
  * 
  */
 public class Log {
-	private static Logger logger = new ConsoleLogger(LogLevel.INFO);
+	private static Logger logger = new ConsoleLogger(LogLevel.DEBUG);
 
 	/**
 	 * Prevent outer instantiation

@@ -1,6 +1,7 @@
 package bg.metaheuristic.abc.hive.queue;
 
 import bg.metaheuristic.abc.environment.resource.Resource;
+import bg.metaheuristic.log.Log;
 
 /**
  * Queue representing the onlookers bees
@@ -14,6 +15,7 @@ public class OnLookersQueue extends ResourceQueue {
 	public void enqueue(final Resource element) {
 		synchronized (queue) {
 			queue.offer(element);
+			Log.debug(Thread.currentThread().getName() + " notifies");
 			queue.notify();
 		}
 	}
@@ -21,7 +23,9 @@ public class OnLookersQueue extends ResourceQueue {
 	@Override
 	public Resource dequeue() throws InterruptedException {
 		synchronized (queue) {
-			while (queue.isEmpty()) {
+			if (queue.isEmpty()) {
+				Log.debug(Thread.currentThread().getName()
+						+ " starting to wait");
 				queue.wait();
 			}
 			return queue.poll();

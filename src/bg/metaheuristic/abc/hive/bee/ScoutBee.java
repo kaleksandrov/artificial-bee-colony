@@ -4,7 +4,6 @@ import bg.metaheuristic.abc.criteria.Criteria;
 import bg.metaheuristic.abc.environment.Environment;
 import bg.metaheuristic.abc.environment.resource.Resource;
 import bg.metaheuristic.abc.hive.Hive;
-import bg.metaheuristic.abc.hive.queue.ResourceQueue;
 import bg.metaheuristic.log.Log;
 
 /**
@@ -18,39 +17,33 @@ public class ScoutBee extends Bee {
 
 	private Environment environment;
 
-	public ScoutBee(final Environment environment,
-			final ResourceQueue onlookersQueue, final Criteria criteria,
-			final Hive hive) {
+	public ScoutBee(final String name, final Environment environment,
+			final Criteria criteria, final Hive hive) {
+		super(name, criteria, hive);
 		this.environment = environment;
-		super.criteria = criteria;
-		super.hive = hive;
 	}
 
 	@Override
 	public void run() {
 
-		Log.debug("SCOUT : " + Thread.currentThread().getName() + " Started");
+		Log.debug(getName() + " started");
 
 		while (true) {
 			Resource resource = null;
 
-			Log.debug("SCOUT : " + Thread.currentThread().getName()
-					+ " Get resource from env...");
 			resource = environment.getResource();
 
 			if (resource != null) {
 
 				if (criteria.process(resource)) {
-					Log.debug("SCOUT : " + Thread.currentThread().getName()
-							+ " Enque task " + resource.toString());
+					Log.debug(getName() + " enque");
 					hive.getOnlookersQueue().enqueue(resource);
 				}
 			} else {
-				hive.decreaseWorkingScoutsCount();
 				break;
 			}
 		}
 
-		Log.debug("SCOUT : " + Thread.currentThread().getName() + " finished");
+		Log.debug(getName() + " finished!");
 	};
 }

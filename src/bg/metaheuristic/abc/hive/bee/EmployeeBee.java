@@ -3,7 +3,6 @@ package bg.metaheuristic.abc.hive.bee;
 import bg.metaheuristic.abc.criteria.Criteria;
 import bg.metaheuristic.abc.environment.resource.Resource;
 import bg.metaheuristic.abc.hive.Hive;
-import bg.metaheuristic.abc.hive.queue.ResourceQueue;
 import bg.metaheuristic.log.Log;
 
 /**
@@ -15,17 +14,16 @@ import bg.metaheuristic.log.Log;
  */
 public class EmployeeBee extends Bee {
 
-	public EmployeeBee(final ResourceQueue onlookersQueue,
-			final Criteria criteria, final Hive hive) {
-		super.criteria = criteria;
-		super.hive = hive;
+	public EmployeeBee(final String name, final Criteria criteria,
+			final Hive hive) {
+		super(name, criteria, hive);
 	}
 
 	@Override
 	public void run() {
-		Log.debug("EMPLOYEE : " + Thread.currentThread().getName() + " Started");
+		Log.debug(getName() + " started!");
 
-		while (hive.isEnvironmentExhausted()) {
+		while (true) {
 			Resource resource = null;
 			try {
 				resource = hive.getOnlookersQueue().dequeue();
@@ -37,17 +35,13 @@ public class EmployeeBee extends Bee {
 				break;
 			}
 
-			Log.debug("EMPLOYEE : " + Thread.currentThread().getName()
-					+ " consume....");
-
 			if (criteria.process(resource)) {
-				Log.debug("EMPLOYEE : " + Thread.currentThread().getName()
-						+ " consumed!");
+				hive.putResult(resource);
+				Log.debug(getName() + " consumed!");
 			}
 
 		}
 
-		Log.debug("EMPLOYEE : " + Thread.currentThread().getName()
-				+ " Finished!");
+		Log.debug(getName() + " finished!");
 	}
 }

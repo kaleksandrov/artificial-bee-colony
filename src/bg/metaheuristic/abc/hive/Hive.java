@@ -5,11 +5,13 @@ import java.util.Set;
 
 import bg.metaheuristic.abc.criteria.Criteria;
 import bg.metaheuristic.abc.environment.Environment;
+import bg.metaheuristic.abc.environment.resource.Resource;
 import bg.metaheuristic.abc.hive.bee.Bee;
 import bg.metaheuristic.abc.hive.bee.EmployeeBee;
 import bg.metaheuristic.abc.hive.bee.ScoutBee;
 import bg.metaheuristic.abc.hive.queue.OnLookersQueue;
-import bg.metaheuristic.abc.hive.queue.ResourceQueue;
+import bg.metaheuristic.abc.util.Constants;
+import bg.metaheuristic.log.Log;
 
 /**
  * Class representing the bee hive.
@@ -21,17 +23,17 @@ public class Hive {
 
 	private Set<Bee> employees;
 	private Set<Bee> scouts;
-	private ResourceQueue onlookersQueue;
+	private OnLookersQueue onlookersQueue;
 	private Environment environment;
-	private Integer workingScoutsCount;
+	private Set<Resource> result;
 
 	public Hive(final int employeesCount, final int scoutsCount,
 			final Environment environment, final Criteria scoutCriteria,
 			final Criteria employeeCriteria) {
 
 		this.onlookersQueue = new OnLookersQueue();
+		this.result = new HashSet<Resource>();
 		this.environment = environment;
-		this.workingScoutsCount = scoutsCount;
 
 		initEmployeeBees(employeesCount, employeeCriteria);
 		initScouts(scoutsCount, scoutCriteria);
@@ -48,25 +50,9 @@ public class Hive {
 		waitToFinish();
 	}
 
-	/**
-	 * Checks if the current environment is exhausted (is running out of
-	 * resources)
-	 * 
-	 * @return
-	 */
-	public boolean isEnvironmentExhausted() {
-		synchronized (workingScoutsCount) {
-			return (workingScoutsCount == 0);
-		}
-	}
-
-	/**
-	 * Decrease the number of active scouts. When there is no resource to be
-	 * checked the scouts are going inactive
-	 */
-	public void decreaseWorkingScoutsCount() {
-		synchronized (workingScoutsCount) {
-			workingScoutsCount--;
+	public void putResult(final Resource resource) {
+		synchronized (result) {
+			result.add(resource);
 		}
 	}
 
@@ -77,10 +63,15 @@ public class Hive {
 	 * @param criteria
 	 */
 	private void initEmployeeBees(final int count, final Criteria criteria) {
+		Log.info(Constants.LOG_RULE_THICK);
+		Log.info("Init scout bees...");
+
 		employees = new HashSet<Bee>(count);
 		for (int i = 0; i < count; i++) {
-			employees.add(new EmployeeBee(onlookersQueue, criteria, this));
+			employees.add(new EmployeeBee("Employee_" + i, criteria, this));
 		}
+
+		Log.info("Done!");
 	}
 
 	/**
@@ -90,19 +81,29 @@ public class Hive {
 	 * @param criteria
 	 */
 	private void initScouts(final int count, final Criteria criteria) {
+		Log.info(Constants.LOG_RULE_THICK);
+		Log.info("Init employee bees...");
+
 		scouts = new HashSet<Bee>(count);
 		for (int i = 0; i < count; i++) {
-			scouts.add(new ScoutBee(environment, onlookersQueue, criteria, this));
+			scouts.add(new ScoutBee("Scout_" + i, environment, criteria, this));
 		}
+
+		Log.info("Done!");
 	}
 
 	/**
 	 * Stars all scouts and send them to investigate and filter resources
 	 */
 	private void sendScoutsToInvestigate() {
+		Log.info(Constants.LOG_RULE_THICK);
+		Log.info("Send scout bees...");
+
 		for (Bee bee : scouts) {
 			bee.start();
 		}
+
+		Log.info("Done!");
 	}
 
 	/**
@@ -110,9 +111,14 @@ public class Hive {
 	 * to be processed
 	 */
 	private void wakeUpEmployees() {
+		Log.info(Constants.LOG_RULE_THICK);
+		Log.info("Wake up employee bees...");
+
 		for (Bee bee : employees) {
 			bee.start();
 		}
+
+		Log.info("Done!");
 	}
 
 	/**
@@ -138,7 +144,7 @@ public class Hive {
 
 	/* Getters & Setters */
 
-	public ResourceQueue getOnlookersQueue() {
+	public OnLookersQueue getOnlookersQueue() {
 		return onlookersQueue;
 	}
 }
