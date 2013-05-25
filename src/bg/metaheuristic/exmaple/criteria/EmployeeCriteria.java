@@ -8,6 +8,13 @@ import bg.metaheuristic.abc.environment.resource.Resource;
 import bg.metaheuristic.exmaple.resource.ListResource;
 import bg.metaheuristic.log.Log;
 
+/**
+ * Implementation of the Criteria class. Searches in the resource the number
+ * <b>7</b>.
+ * 
+ * @author Kiril Aleksandrov
+ * 
+ */
 public class EmployeeCriteria extends Criteria {
 
 	@Override

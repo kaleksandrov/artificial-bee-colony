@@ -6,7 +6,7 @@ import bg.metaheuristic.abc.environment.resource.Resource;
 import bg.metaheuristic.abc.util.Constants;
 import bg.metaheuristic.log.Log;
 
-public class EnvironmentGenerator extends Generator<Environment> {
+public class EnvironmentGenerator extends DummyGenerator<Environment> {
 
 	private int generateEnvironmentSize() {
 		return randomInt(Constants.ENVIRONMENT_MIN_SIZE,
@@ -29,7 +29,7 @@ public class EnvironmentGenerator extends Generator<Environment> {
 
 		Log.info("Size : " + size);
 
-		final Generator<Resource> resourceGenerator = new ResourceGenerator();
+		final DummyGenerator<Resource> resourceGenerator = new ResourceGenerator();
 
 		for (int i = 0; i < size; i++) {
 			Log.info("Index : " + i);

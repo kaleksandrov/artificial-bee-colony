@@ -8,8 +8,19 @@ import bg.metaheuristic.abc.util.Constants;
 import bg.metaheuristic.exmaple.resource.ListResource;
 import bg.metaheuristic.log.Log;
 
-public class ResourceGenerator extends Generator<Resource> {
+/**
+ * Generates a resource object filled up with dummy values
+ * 
+ * @author Kiril Aleksandrov
+ * 
+ */
+public class ResourceGenerator extends DummyGenerator<Resource> {
 
+	/**
+	 * Generate a random number for values collection size
+	 * 
+	 * @return
+	 */
 	private int generateListSize() {
 		return randomInt(Constants.LIST_MIN_SIZE, Constants.LIST_MAX_SIZE);
 	}
@@ -17,30 +28,12 @@ public class ResourceGenerator extends Generator<Resource> {
 	@Override
 	public Resource generate() {
 
-		// Log.info(Constants.LOG_RULE_THIN);
-		// Log.info("Generating resource");
-
-		final int listSize = generateListSize();
-
-		Log.info("Size : " + listSize);
-
-		final List<Integer> list = new ArrayList<Integer>(listSize);
-		final Resource resource = new ListResource(list);
-
-		for (int i = 0; i < listSize; i++) {
-			list.add(randomInt(0, 10));
-		}
-
-		// Log.info("Done!");
-
-		return resource;
+		final int size = generateListSize();
+		return generate(size);
 	}
 
 	@Override
 	public Resource generate(final int size) {
-
-		// Log.info(Constants.LOG_RULE_THIN);
-		// Log.info("Generating resource");
 
 		Log.info("Size : " + size);
 
@@ -50,8 +43,6 @@ public class ResourceGenerator extends Generator<Resource> {
 		for (int i = 0; i < size; i++) {
 			list.add(randomInt(0, 10));
 		}
-
-		// Log.info("Done!");
 
 		return resource;
 	}

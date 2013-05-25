@@ -4,6 +4,13 @@ import java.util.List;
 
 import bg.metaheuristic.abc.environment.resource.Resource;
 
+/**
+ * Implementation of the resource class. Holds a bunch of values in a list
+ * collection.
+ * 
+ * @author Kiril Aleksandrov
+ * 
+ */
 public class ListResource extends Resource {
 
 	private List<Integer> values;

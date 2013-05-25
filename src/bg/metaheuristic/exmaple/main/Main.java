@@ -6,7 +6,7 @@ import bg.metaheuristic.abc.hive.Hive;
 import bg.metaheuristic.exmaple.criteria.EmployeeCriteria;
 import bg.metaheuristic.exmaple.criteria.ScoutCriteria;
 import bg.metaheuristic.exmaple.generator.EnvironmentGenerator;
-import bg.metaheuristic.exmaple.generator.Generator;
+import bg.metaheuristic.exmaple.generator.DummyGenerator;
 
 /**
  * The main class of the application
@@ -23,7 +23,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-		final Generator<Environment> generator = new EnvironmentGenerator();
+		final DummyGenerator<Environment> generator = new EnvironmentGenerator();
 		final Environment environment = generator.generate();
 		final Criteria scoutCriteria = new ScoutCriteria();
 		final Criteria employeeCriteria = new EmployeeCriteria();
