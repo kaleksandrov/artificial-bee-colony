@@ -17,4 +17,11 @@ public abstract class Environment {
 	 * @return
 	 */
 	public abstract Resource getResource();
+
+	/**
+	 * Adds a new resource to the current environment
+	 * 
+	 * @param resource
+	 */
+	public abstract void addResource(final Resource resource);
 }

@@ -35,6 +35,7 @@ public class HashSetEnvironment extends Environment {
 	 * 
 	 * @param resource
 	 */
+	@Override
 	public void addResource(final Resource resource) {
 		if (resource != null) {
 			resources.add(resource);
