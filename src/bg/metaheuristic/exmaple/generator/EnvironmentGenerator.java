@@ -15,18 +15,23 @@ public class EnvironmentGenerator extends Generator<Environment> {
 
 	@Override
 	public Environment generate() {
+		final int size = generateEnvironmentSize();
+		return generate(size);
+	}
+
+	@Override
+	public Environment generate(final int size) {
 
 		Log.info(Constants.LOG_RULE_THICK);
 		Log.info("Generating environment");
 
 		final Environment environment = new HashSetEnvironment();
-		final int environmentSize = generateEnvironmentSize();
 
-		Log.info("Size : " + environmentSize);
+		Log.info("Size : " + size);
 
 		final Generator<Resource> resourceGenerator = new ResourceGenerator();
 
-		for (int i = 0; i < environmentSize; i++) {
+		for (int i = 0; i < size; i++) {
 			Log.info("Index : " + i);
 			environment.addResource(resourceGenerator.generate());
 		}

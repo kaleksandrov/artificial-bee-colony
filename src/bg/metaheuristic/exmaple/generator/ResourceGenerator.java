@@ -17,8 +17,8 @@ public class ResourceGenerator extends Generator<Resource> {
 	@Override
 	public Resource generate() {
 
-//		Log.info(Constants.LOG_RULE_THIN);
-//		Log.info("Generating resource");
+		// Log.info(Constants.LOG_RULE_THIN);
+		// Log.info("Generating resource");
 
 		final int listSize = generateListSize();
 
@@ -31,7 +31,27 @@ public class ResourceGenerator extends Generator<Resource> {
 			list.add(randomInt(0, 10));
 		}
 
-//		Log.info("Done!");
+		// Log.info("Done!");
+
+		return resource;
+	}
+
+	@Override
+	public Resource generate(final int size) {
+
+		// Log.info(Constants.LOG_RULE_THIN);
+		// Log.info("Generating resource");
+
+		Log.info("Size : " + size);
+
+		final List<Integer> list = new ArrayList<Integer>(size);
+		final Resource resource = new ListResource(list);
+
+		for (int i = 0; i < size; i++) {
+			list.add(randomInt(0, 10));
+		}
+
+		// Log.info("Done!");
 
 		return resource;
 	}
