@@ -16,11 +16,6 @@ import bg.metaheuristic.log.Log;
  */
 public class ResourceGenerator extends DummyGenerator<Resource> {
 
-	/**
-	 * Generate a random number for values collection size
-	 * 
-	 * @return
-	 */
 	private int generateListSize() {
 		return randomInt(Constants.LIST_MIN_SIZE, Constants.LIST_MAX_SIZE);
 	}
@@ -32,7 +27,7 @@ public class ResourceGenerator extends DummyGenerator<Resource> {
 		return generate(size);
 	}
 
-//	@Override
+	// @Override
 	public Resource generate(final int size) {
 
 		Log.info("Size : " + size);

@@ -23,18 +23,20 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-		if (args.length == 1) {
-			final String filename = args[0];
-			final Environment environment = Utils.loadEnvironment(filename);
+		if (args.length == 3) {
+			final int scoutCount = Integer.parseInt(args[0]);
+			final int employeeCount = Integer.parseInt(args[1]);
+			final String filename = args[2];
 
+			final Environment environment = Utils.loadEnvironment(filename);
 			final Criteria scoutCriteria = new ScoutCriteria();
 			final Criteria employeeCriteria = new EmployeeCriteria();
-
-			final Hive hive = new Hive(10, 10, environment, scoutCriteria,
-					employeeCriteria);
+			
+			final Hive hive = new Hive(employeeCount, scoutCount, environment,
+					scoutCriteria, employeeCriteria);
 			hive.start();
 		} else {
-			Log.info("Please provide a single argument that is the filename of the file to be processed!");
+			Log.info("Please provide three arguments : scouts couts, employees count, filename!");
 		}
 	}
 }

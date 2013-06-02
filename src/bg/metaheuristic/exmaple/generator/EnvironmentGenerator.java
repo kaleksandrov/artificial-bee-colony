@@ -2,37 +2,37 @@ package bg.metaheuristic.exmaple.generator;
 
 import bg.metaheuristic.abc.environment.Environment;
 import bg.metaheuristic.abc.environment.HashSetEnvironment;
-import bg.metaheuristic.abc.environment.resource.Resource;
-import bg.metaheuristic.abc.util.Constants;
 import bg.metaheuristic.log.Log;
 
 public class EnvironmentGenerator extends DummyGenerator<Environment> {
 
-	private int generateEnvironmentSize() {
-		return randomInt(Constants.ENVIRONMENT_MIN_SIZE,
-				Constants.ENVIRONMENT_MAX_SIZE);
-	}
+	private int environmentSize;
 
 	@Override
 	public Environment generate() {
-		final int size = generateEnvironmentSize();
-		return generate(size);
-	}
-
-//	@Override
-	public Environment generate(final int size) {
 
 		final Environment environment = new HashSetEnvironment();
 
-		Log.info("Size : " + size);
+		final ResourceGenerator resourceGenerator = new ResourceGenerator();
 
-		final DummyGenerator<Resource> resourceGenerator = new ResourceGenerator();
+		Log.info("Size : " + environmentSize);
 
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < environmentSize; i++) {
 			Log.info("Index : " + i);
+
 			environment.addResource(resourceGenerator.generate());
 		}
 
 		return environment;
+	}
+
+	/* Getters & Setters */
+
+	public int getEnvironmentSize() {
+		return environmentSize;
+	}
+
+	public void setEnvironmentSize(int environmentSize) {
+		this.environmentSize = environmentSize;
 	}
 }
