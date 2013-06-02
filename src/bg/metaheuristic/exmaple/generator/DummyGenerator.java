@@ -12,13 +12,14 @@ import java.util.Random;
 public abstract class DummyGenerator<T> {
 
 	/**
-	 * Generates a ranom int number between the given bounds
+	 * Generates a random int number between the given bounds
 	 * 
 	 * @param min
 	 * @param max
 	 * @return
 	 */
 	protected int randomInt(final int min, final int max) {
+
 		final Random randomGenerator = new Random();
 		final int randomNumber = randomGenerator.nextInt(max - min);
 
@@ -41,13 +42,5 @@ public abstract class DummyGenerator<T> {
 	 * @return
 	 */
 	public abstract T generate();
-
-	/**
-	 * Generates a dummy object using the given size
-	 * 
-	 * @param size
-	 * @return
-	 */
-	public abstract T generate(final int size);
 
 }
