@@ -22,4 +22,8 @@ public interface Constants {
 
 	int ENVIRONMENT_MIN_SIZE = 500;
 	int ENVIRONMENT_MAX_SIZE = 1000;
+
+	/* Persisting */
+
+	String FIELD_SEPARATOR = "\t";
 }

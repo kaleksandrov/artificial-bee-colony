@@ -3,10 +3,10 @@ package bg.metaheuristic.exmaple.main;
 import bg.metaheuristic.abc.criteria.Criteria;
 import bg.metaheuristic.abc.environment.Environment;
 import bg.metaheuristic.abc.hive.Hive;
+import bg.metaheuristic.abc.util.Utils;
 import bg.metaheuristic.exmaple.criteria.EmployeeCriteria;
 import bg.metaheuristic.exmaple.criteria.ScoutCriteria;
-import bg.metaheuristic.exmaple.generator.EnvironmentGenerator;
-import bg.metaheuristic.exmaple.generator.DummyGenerator;
+import bg.metaheuristic.log.Log;
 
 /**
  * The main class of the application
@@ -23,13 +23,18 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-		final DummyGenerator<Environment> generator = new EnvironmentGenerator();
-		final Environment environment = generator.generate();
-		final Criteria scoutCriteria = new ScoutCriteria();
-		final Criteria employeeCriteria = new EmployeeCriteria();
+		if (args.length == 1) {
+			final String filename = args[0];
+			final Environment environment = Utils.loadEnvironment(filename);
 
-		final Hive hive = new Hive(10, 10, environment, scoutCriteria,
-				employeeCriteria);
-		hive.start();
+			final Criteria scoutCriteria = new ScoutCriteria();
+			final Criteria employeeCriteria = new EmployeeCriteria();
+
+			final Hive hive = new Hive(10, 10, environment, scoutCriteria,
+					employeeCriteria);
+			hive.start();
+		} else {
+			Log.info("Please provide a single argument that is the filename of the file to be processed!");
+		}
 	}
 }

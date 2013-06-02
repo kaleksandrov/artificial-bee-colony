@@ -22,9 +22,6 @@ public class EnvironmentGenerator extends DummyGenerator<Environment> {
 	@Override
 	public Environment generate(final int size) {
 
-		Log.info(Constants.LOG_RULE_THICK);
-		Log.info("Generating environment");
-
 		final Environment environment = new HashSetEnvironment();
 
 		Log.info("Size : " + size);
@@ -35,8 +32,6 @@ public class EnvironmentGenerator extends DummyGenerator<Environment> {
 			Log.info("Index : " + i);
 			environment.addResource(resourceGenerator.generate());
 		}
-
-		Log.info("Environment generated!");
 
 		return environment;
 	}
