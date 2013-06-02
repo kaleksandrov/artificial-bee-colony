@@ -31,10 +31,15 @@ public class Main {
 			final Environment environment = Utils.loadEnvironment(filename);
 			final Criteria scoutCriteria = new ScoutCriteria();
 			final Criteria employeeCriteria = new EmployeeCriteria();
-			
+
 			final Hive hive = new Hive(employeeCount, scoutCount, environment,
 					scoutCriteria, employeeCriteria);
+
+			long start = Utils.now();
 			hive.start();
+			long end = Utils.now();
+
+			System.out.println("Time for execution : " + (end - start));
 		} else {
 			Log.info("Please provide three arguments : scouts couts, employees count, filename!");
 		}

@@ -36,7 +36,7 @@ public class ResourceGenerator extends DummyGenerator<Resource> {
 		final Resource resource = new ListResource(list);
 
 		for (int i = 0; i < size; i++) {
-			list.add(randomInt(0, 10));
+			list.add(randomInt(0, 100000000));
 		}
 
 		return resource;

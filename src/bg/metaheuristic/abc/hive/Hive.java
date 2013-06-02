@@ -146,6 +146,9 @@ public class Hive {
 			Log.info(Constants.LOG_RULE_THIN);
 			Log.info(resource.toString());
 		}
+
+		Log.info(Constants.LOG_RULE_THICK);
+		Log.info("Count : " + result.size());
 	}
 
 	/* Getters & Setters */
