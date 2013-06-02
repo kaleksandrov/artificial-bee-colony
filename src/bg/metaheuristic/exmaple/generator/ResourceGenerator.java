@@ -32,7 +32,7 @@ public class ResourceGenerator extends DummyGenerator<Resource> {
 		return generate(size);
 	}
 
-	@Override
+//	@Override
 	public Resource generate(final int size) {
 
 		Log.info("Size : " + size);
