@@ -17,6 +17,9 @@ import bg.metaheuristic.log.Log;
  */
 public class EmployeeCriteria extends Criteria {
 
+	private static final int OFFSET = 3;
+	private static final int SEARCH_VALUE = 7;
+
 	@Override
 	public boolean process(final Resource resource) {
 
@@ -24,8 +27,22 @@ public class EmployeeCriteria extends Criteria {
 
 		Collections.sort(values);
 
-		final int result = Collections.binarySearch(values, 7);
+		boolean result = false;
+
+		for (int offset = 0; offset < OFFSET; offset++) {
+			final int resultLeft = Collections.binarySearch(values,
+					SEARCH_VALUE - offset);
+			final int resultRight = Collections.binarySearch(values,
+					SEARCH_VALUE + offset);
+
+			result = resultLeft >= 0 || resultRight >= 0;
+
+			if (result) {
+				break;
+			}
+		}
+
 		Log.info("Result : " + result);
-		return (result > 0);
+		return (result);
 	}
 }

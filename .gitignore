@@ -21,3 +21,4 @@ bin
 .classpath
 .project
 .settings
+env_test
