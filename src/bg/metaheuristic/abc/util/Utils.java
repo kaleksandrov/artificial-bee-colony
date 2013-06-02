@@ -29,6 +29,10 @@ public class Utils {
 
 	}
 
+	public static long now() {
+		return System.currentTimeMillis();
+	}
+
 	/**
 	 * Saves the environment to a file
 	 * 
@@ -83,7 +87,7 @@ public class Utils {
 				environment.addResource(resource);
 			}
 			reader.close();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
