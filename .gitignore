@@ -12,13 +12,10 @@
 #     Vim swap    #
 ###################
 *~
+*.swp
 
 ###################
 #      Other      #
 ###################
 build
 bin
-.classpath
-.project
-.settings
-env_test
